@@ -1,0 +1,9 @@
+#soft endstop
+soft_endstop.enable         true         # Enable soft endstops
+soft_endstop.x_min          0            # Minimum X position
+soft_endstop.x_max          200          # Maximum X position
+soft_endstop.y_min          0            # Minimum Y position
+soft_endstop.y_max          200          # Maximum Y position
+soft_endstop.z_min          0            # Minimum Z position
+soft_endstop.z_max          200          # Maximum Z position
+soft_endstop.halt           true         # Whether to issue a HALT state when hitting a soft endstop (if false, will just ignore commands that would exceed the limit)

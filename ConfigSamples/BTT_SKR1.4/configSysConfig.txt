@@ -1,0 +1,23 @@
+## System configuration
+# Serial communications configuration ( baud rate defaults to 9600 if undefined )
+# For communication over the UART port, *not* the USB/Serial port
+uart0.baud_rate                                 9600             # Baud rate for the default hardware ( UART ) serial port
+
+second_usb_serial_enable                        false            # This enables a second USB serial port
+leds_disable                                    true             # Disable using leds after config loaded
+play_led_disable                                true             # Disable the play led
+
+# Kill button maybe assigned to a different pin, set to the onboard pin by default
+# See http://smoothieware.org/killbutton
+kill_button_enable                              false            # Set to true to enable a kill button
+kill_button_pin                                 2.12             # Kill button pin. default is same as pause button 2.12 (2.11 is another good choice)
+
+#msd_disable                                    false            # Disable the MSD (USB SDCARD), see http://smoothieware.org/troubleshooting#disable-msd
+#dfu_enable                                     false            # For linux developers, set to true to enable DFU
+
+# Only needed on a smoothieboard
+# See http://smoothieware.org/currentcontrol
+currentcontrol_module_enable                    false            # Control stepper motor current via the configuration file
+laser_module_enable                             false            # Whether to activate the laser module at all
+zprobe.enable                                   false            # Set to true to enable a zprobe
+network.enable                                  false            # Enable the ethernet network services

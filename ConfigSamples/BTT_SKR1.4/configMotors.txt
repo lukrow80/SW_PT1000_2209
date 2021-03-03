@@ -1,0 +1,120 @@
+# Basic motion configuration
+default_feed_rate                            5000             # Default speed (mm/minute) for G1/G2/G3 moves
+default_seek_rate                            10000             # Default speed (mm/minute) for G0 moves, max 40 000
+mm_per_arc_segment                           0.01             # Fixed length for line segments that divide arcs, 0 to disable
+mm_max_arc_error                             0.01             # The maximum error for line segments that divide arcs 0 to disable
+
+# Arm solution configuration : Cartesian robot. Translates mm positions into stepper positions
+# See http://smoothieware.org/stepper-motors
+
+#dla X i Y srednica 22.22 mm pe³ny obrót 69.7mm
+#full steps per rotation = 200 (1.8 stopnia) microstep = 0
+#200/69.7
+
+
+#dla Z jeden pe³ny obrót przesów o 8 mm (trzeba sprawdziæ)
+#200/8 = 25
+# zapis !o oznacza ,ze odwracamy pin - znak ! a znak o oznacza ze masa jest w trybie pracy z otwartym koletkorem.
+# taki tryb jest potrzeby dla TB6600 ktory pracuje przy 5V lub moze byc sterowany 0-zerem.
+motor_driver_control.enable                    true            # Enable module
+
+# X axis
+alpha_steps_per_mm                           142.222               # Steps per mm for alpha ( X ) stepper
+alpha_step_pin                               2.2            # Pin for alpha stepper step signal
+alpha_dir_pin                                2.6!            # Pin for alpha stepper direction, add '!' to reverse direction
+alpha_en_pin                                 2.1            # Pin for alpha enable pin
+alpha_acceleration                           300.0			  # mm/s^2
+#x_axis_max_speed                            4000.0           # Maximum speed in mm/min
+alpha_max_rate                               4000.0           # Maximum rate in mm/min
+
+## Motor driver configuration
+
+motor_driver_control.alpha.enable               true            # Enable motor driver module
+motor_driver_control.alpha.axis                 X               # Axis designator on which the motor driver is set 
+motor_driver_control.alpha.chip                 TMC2209         # Motor driver chip type
+motor_driver_control.alpha.sw_uart_tx_pin       4.29            # Transmitting line from the board to the alpha. Required.
+motor_driver_control.alpha.sw_uart_rx_pin       1.17            # Receiving line to the board; NC if not connected (default).
+motor_driver_control.alpha.sw_uart_baudrate    19200            # Software UART baudrate. Value higher than 50k is not recommended
+motor_driver_control.alpha.current             2000            # Motor currents in mA - PEAK current, multiply with 0.707 to get RMS current
+motor_driver_control.alpha.sense_resistor      50              # Sensing resistor value as a reference in milliOhms
+motor_driver_control.alpha.microsteps        64              # The actual microstep resolution (MRES) that will be extrapolated to 256 microsteps.
+                                                                 # It can be 1, 2, 4, 8, 16, 32, 64, 128 or 256 microsteps
+motor_driver_control.alpha.chopper_mode        0               # 0 = spreadCycle ; 1 = stealthChop 
+
+
+# Y axis
+beta_steps_per_mm                            35.555             # Steps per mm for beta  ( Y ) stepper
+beta_step_pin                                0.19           # Pin for beta stepper step signal
+beta_dir_pin                                 0.20!           # Pin for beta stepper direction, add '!' to reverse direction
+beta_en_pin                                  2.8            # Pin for beta enable
+beta_acceleration                            3000.0			  # mm/s^2
+y_axis_max_speed                             40000.0           # Maximum speed in mm/min
+#beta_max_rate                               40000.0           # Maxmimum rate in mm/min
+
+
+## Motor driver configuration
+motor_driver_control.beta.enable               true            # Enable motor driver module
+motor_driver_control.beta.axis                 Y               # Axis designator on which the motor driver is set 
+motor_driver_control.beta.chip                 TMC2209         # Motor driver chip type
+motor_driver_control.beta.sw_uart_tx_pin       1.16            # Transmitting line from the board to the alpha. Required.
+motor_driver_control.beta.sw_uart_rx_pin       1.15            # Receiving line to the board; NC if not connected (default).
+motor_driver_control.beta.sw_uart_baudrate    19200            # Software UART baudrate. Value higher than 50k is not recommended
+motor_driver_control.beta.current             2000            # Motor currents in mA - PEAK current, multiply with 0.707 to get RMS current
+motor_driver_control.beta.sense_resistor      50              # Sensing resistor value as a reference in milliOhms
+motor_driver_control.beta.microsteps        64              # The actual microstep resolution (MRES) that will be extrapolated to 256 microsteps.
+                                                                 # It can be 1, 2, 4, 8, 16, 32, 64, 128 or 256 microsteps
+motor_driver_control.beta.chopper_mode        0               # 0 = spreadCycle ; 1 = stealthChop 
+
+
+
+# Z axis
+gamma_steps_per_mm                           35.555              # Steps per mm for gamma ( Z ) stepper
+gamma_step_pin                               0.22             # Pin for gamma stepper step signal
+gamma_dir_pin                                2.11            # Pin for gamma stepper direction, add '!' to reverse direction
+gamma_en_pin                                 0.21             # Pin for gamma enable
+gamma_acceleration                           3000.0			  # mm/s^2
+z_axis_max_speed                             10000.0           # Maximum speed in mm/min
+gamma_max_rate                               10000.0           # Maximum rate in mm/min
+
+
+motor_driver_control.gamma.enable               true            # Enable motor driver module
+motor_driver_control.gamma.axis                 Z               # Axis designator on which the motor driver is set 
+motor_driver_control.gamma.chip                 TMC2209         # Motor driver chip type
+motor_driver_control.gamma.sw_uart_tx_pin       1.14            # Transmitting line from the board to the alpha. Required.
+motor_driver_control.gamma.sw_uart_rx_pin       1.10            # Receiving line to the board; NC if not connected (default).
+motor_driver_control.gamma.sw_uart_baudrate    19200            # Software UART baudrate. Value higher than 50k is not recommended
+motor_driver_control.gamma.current             800            # Motor currents in mA - PEAK current, multiply with 0.707 to get RMS current
+motor_driver_control.gamma.sense_resistor      50              # Sensing resistor value as a reference in milliOhms
+motor_driver_control.gamma.microsteps        64              # The actual microstep resolution (MRES) that will be extrapolated to 256 microsteps.
+                                                                 # It can be 1, 2, 4, 8, 16, 32, 64, 128 or 256 microsteps
+motor_driver_control.gamma.chopper_mode        0               # 0 = spreadCycle ; 1 = stealthChop 
+
+
+# A axis
+# delta_steps_per_mm                    35.55     # may be steps per degree for example
+# delta_step_pin                               2.13              # Pin for delta stepper step signal
+#delta_dir_pin                                0.11             # Pin for delta stepper direction
+#delta_en_pin                                 2.12             # Pin for delta enable
+#delta_max_rate                               10000.0            # mm/min
+#delta_acceleration                          500.0            # mm/sec2
+
+#motor_driver_control.delta.enable               true            # Enable motor driver module
+#motor_driver_control.delta.axis                 A               # Axis designator on which the motor driver is set 
+#motor_driver_control.delta.chip                 TMC2209         # Motor driver chip type
+#motor_driver_control.delta.sw_uart_tx_pin       1.9            # Transmitting line from the board to the alpha. Required.
+#motor_driver_control.delta.sw_uart_rx_pin       1.8            # Receiving line to the board; NC if not connected (default).
+#motor_driver_control.delta.sw_uart_baudrate    19200            # Software UART baudrate. Value higher than 50k is not recommended
+#motor_driver_control.delta.current             800            # Motor currents in mA - PEAK current, multiply with 0.707 to get RMS current
+#motor_driver_control.delta.sense_resistor      50              # Sensing resistor value as a reference in milliOhms
+#motor_driver_control.delta.microsteps        64              # The actual microstep resolution (MRES) that will be extrapolated to 256 microsteps.
+                                                                 # It can be 1, 2, 4, 8, 16, 32, 64, 128 or 256 microsteps
+#motor_driver_control.gamma.chopper_mode        0               # 0 = spreadCycle ; 1 = stealthChop 
+
+
+
+# Planner module configuration : Look-ahead and acceleration configuration
+# See http://smoothieware.org/motion-control
+acceleration                                 6000             # Acceleration in mm/second/second.
+#z_acceleration                              500              # Acceleration for Z only moves in mm/s^2, 0 uses acceleration which is the default. DO NOT SET ON A DELTA
+junction_deviation                           0.1             # See http://smoothieware.org/motion-control#junction-deviation
+#z_junction_deviation                        0.0              # For Z only moves, -1 uses junction_deviation, zero disables junction_deviation on z moves DO NOT SET ON A DELTA

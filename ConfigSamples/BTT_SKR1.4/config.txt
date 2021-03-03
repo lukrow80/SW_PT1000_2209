@@ -1,0 +1,16 @@
+# Smoothieboard configuration file, see http://smoothieware.org/configuring-smoothie
+# NOTE Lines must not exceed 132 characters, and '#' characters mean what follows is ignored
+## Robot module configurations : general handling of movement G-codes and slicing into moves
+
+# Config for BTT SKR 1.3 Printer with 2209 TCM driver using UART and PT1000 Thermistor (without amplifier)
+grbl_mode   false # wlaczone defaultowo
+
+
+include configMotors.txt
+include configExtruders.txt
+#include configSwitch.txt
+include configEndstops.txt
+#include configSoftEndstops.txt
+include configSysConfig.txt                       
+include configTemperature.txt
+include configPanel.txt

@@ -1,0 +1,42 @@
+## Switch modules
+# See http://smoothieware.org/switch
+
+
+
+# Switch module for servo control using S/W PWM
+switch.servo1.enable                            true             # Enable this module
+switch.servo1.input_on_command                  M280             # M280 S7.5 would be midway
+switch.servo1.input_off_command                 M281             # Same as M280 S0 0% duty cycle, effectively off
+switch.servo1.output_pin                        1.23             # May be any spare pin
+switch.servo1.output_type                       hwpwm            # Software pwm output settable with S parameter in the input_on_command
+switch.servo1.subcode							1				 # The subcode that the input on or input off commands respond to M106.1  
+
+switch.servo2.enable                            true             # Enable this module
+switch.servo2.input_on_command                  M280             # M280 S7.5 would be midway
+switch.servo2.input_off_command                 M281             # Same as M280 S0 0% duty cycle, effectively off
+switch.servo2.output_pin                        1.21             # May be any spare pin
+switch.servo2.output_type                       hwpwm            # Software pwm output settable with S parameter in the input_on_command
+switch.servo2.subcode							2				 # The subcode that the input on or input off commands respond to M106.1  
+
+switch.servo3.enable                            true             # Enable this module
+switch.servo3.input_on_command                  M280             # M280 S7.5 would be midway
+switch.servo3.input_off_command                 M281             # Same as M280 S0 0% duty cycle, effectively off
+switch.servo3.output_pin                        1.20             # May be any spare pin
+switch.servo3.output_type                       hwpwm            # Software pwm output settable with S parameter in the input_on_command
+switch.servo3.subcode							3				 # The subcode that the input on or input off commands respond to M106.1  
+
+switch.servo4.enable                            true             # Enable this module
+switch.servo4.input_on_command                  M280             # M280 S7.5 would be midway
+switch.servo4.input_off_command                 M281             # Same as M280 S0 0% duty cycle, effectively off
+switch.servo4.output_pin                        1.18             # May be any spare pin
+switch.servo4.output_type                       hwpwm            # Software pwm output settable with S parameter in the input_on_command
+switch.servo4.subcode							4				 # The subcode that the input on or input off commands respond to M106.1  
+
+
+
+
+
+#switch.servo.pwm_period_ms                    20               # set period to 20ms (50Hz) default is 50Hz
+#switch.servo.startup_state                    false            # false uses startup_value on boot true uses default_on_value
+#switch.servo.startup_value                    7.43             # On boot and HALT it will set this PWM value
+#switch.servo.default_on_value                 3.3              # This PWM value will be set if M280 doe snot have an S parameter, it is also the value used if startup_state is true

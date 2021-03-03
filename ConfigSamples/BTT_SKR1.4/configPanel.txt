@@ -1,0 +1,26 @@
+## Panel
+# See http://smoothieware.org/panel
+# Please find your panel on the wiki and copy/paste the right configuration here
+panel.enable                                 true             # Set to true to enable the panel code
+
+# Example for reprap discount GLCD
+
+panel.lcd                                   reprap_discount_glcd     #
+panel.spi_channel                           0                 # SPI channel to use
+panel.spi_cs_pin                            0.16              # SPI chip select
+panel.encoder_a_pin                         3.25!^            # Encoder pin
+panel.encoder_b_pin                         1.31!^            # Encoder pin
+panel.click_button_pin                      3.26!^            # Click button
+#panel.buzz_pin                             0.17              # Pin for buzze 
+#panel.back_button_pin                      2.11!^            # Back button
+
+panel.menu_offset                           0                 # Some panels will need 1 here
+
+panel.alpha_jog_feedrate                    6000              # X jogging feedrate in mm/min
+panel.beta_jog_feedrate                     6000              # Y jogging feedrate in mm/min
+panel.gamma_jog_feedrate                    200               # Z jogging feedrate in mm/min
+
+panel.encoder_resolution                    3                 #the number of pulses the encoder emits per detent/clic
+
+panel.hotend_temperature                    185               # Temp to set hotend when preheat is selected
+panel.bed_temperature                       60                # Temp to set bed when preheat is selected

@@ -1,0 +1,40 @@
+## Extruder module configuration
+# See http://smoothieware.org/extruder
+extruder.hotend.enable                          true          # Whether to activate the extruder module at all. All configuration is ignored if false
+extruder.hotend.steps_per_mm                    140           # Steps per mm for extruder stepper
+extruder.hotend.default_feed_rate               600           # Default rate ( mm/minute ) for moves where only the extruder moves
+extruder.hotend.acceleration                    500           # Acceleration for the stepper motor mm/sec2
+extruder.hotend.max_speed                       50            # Maximum speed in mm/s
+
+extruder.hotend.step_pin                        2.13          # Pin for extruder step signal
+extruder.hotend.dir_pin                         0.11!         # Pin for extruder dir signal ( add '!' to reverse direction )
+extruder.hotend.en_pin                          2.12          # Pin for extruder enable signal
+
+motor_driver_control.delta.enable               true          # Enable motor driver module
+motor_driver_control.delta.axis                 A             # Axis designator on which the motor driver is set 
+motor_driver_control.delta.chip                 TMC2209       # Motor driver chip type
+motor_driver_control.delta.sw_uart_tx_pin       1.9           # Transmitting line from the board to the alpha. Required.
+motor_driver_control.delta.sw_uart_rx_pin       1.8           # Receiving line to the board; NC if not connected (default).
+motor_driver_control.delta.sw_uart_baudrate     19200         # Software UART baudrate. Value higher than 50k is not recommended
+motor_driver_control.delta.current              800           # Motor currents in mA - PEAK current, multiply with 0.707 to get RMS current
+motor_driver_control.delta.sense_resistor       50            # Sensing resistor value as a reference in milliOhms
+motor_driver_control.delta.microsteps           64            # The actual microstep resolution (MRES) that will be extrapolated to 256 microsteps.
+                                                              # It can be 1, 2, 4, 8, 16, 32, 64, 128 or 256 microsteps
+motor_driver_control.gamma.chopper_mode         0             # 0 = spreadCycle ; 1 = stealthChop 
+
+
+#extruder.hotend.filament_diameter              1.75          #srednica filametu
+
+# Extruder offset
+#extruder.hotend.x_offset                       0             # X offset from origin in mm
+#extruder.hotend.y_offset                       0             # Y offset from origin in mm
+#extruder.hotend.z_offset                       0             # Z offset from origin in mm
+
+# Firmware retract settings when using G10/G11, these are the defaults if not defined, must be defined for each extruder if not using the defaults
+#extruder.hotend.retract_length                 3            # Retract length in mm
+#extruder.hotend.retract_feedrate               45           # Retract feedrate in mm/sec
+#extruder.hotend.retract_recover_length         0            # Additional length for recover
+#extruder.hotend.retract_recover_feedrate       8            # Recover feedrate in mm/sec (should be less than retract feedrate)
+#extruder.hotend.retract_zlift_length           0            # Z-lift on retract in mm, 0 disables
+#extruder.hotend.retract_zlift_feedrate         6000         # Z-lift feedrate in mm/min (Note mm/min NOT mm/sec)
+

@@ -15,6 +15,7 @@
 #include "StreamOutputPool.h"
 
 #define PT1000_pin_checksum  CHECKSUM("PT1000_pin")
+#define PT1000_offset_checksum  CHECKSUM("PT1000_offset")
 
 PT1000::PT1000()
 {
@@ -27,9 +28,12 @@ PT1000::~PT1000()
 // Get configuration from the config file
 void PT1000::UpdateConfig(uint16_t module_checksum, uint16_t name_checksum)
 {
-	// Pin used for ADC readings
+// Pin used for ADC readings
     this->PT1000_pin.from_string(THEKERNEL->config->value(module_checksum, name_checksum, PT1000_pin_checksum)->required()->as_string());
     THEKERNEL->adc->enable_pin(&PT1000_pin);
+
+// adding PT1000 calibration offset value.
+    this->PT1000_offset = THEKERNEL->config->value(module_checksum, name_checksum, PT1000_offset_checksum)->by_default(0)->as_number();
 }
 
 float PT1000::get_temperature()
@@ -45,7 +49,11 @@ void PT1000::get_raw()
 {
     int adc_value= new_PT1000_reading();
     float t = adc_value_to_temperature(new_PT1000_reading());
-    THEKERNEL->streams->printf("PT1000: adc= %d, temp= %f\n", adc_value, t);
+    //PT1000 calculated resistance for calibration purpose
+    float R = 4700 *3.3 *adc_value;
+    //PT1000_offset to resistance calculations at 4.7kOhm and 3.3V
+    float oR = 4700 *3.3 *PT1000_offset;
+    THEKERNEL->streams->printf("PT1000: adc= %d, R: %f Ohm, offset= %d, oR: %f Ohm, temp= %f\n", adc_value, R, PT1000_offset, oR, t);
     // reset the min/max
     min_temp = max_temp = t;
 }
@@ -54,11 +62,11 @@ float PT1000::adc_value_to_temperature(uint32_t adc_value)
 {
     const uint32_t max_adc_value= THEKERNEL->adc->get_max_value();
     if ((adc_value >= max_adc_value) || (adc_value == 0))
-        return infinityf();
+    return infinityf();
 
-    // polynomial approximation for PT1000, using 4.7kOhm and 1kOhm (PT1000) 3.3V.
-
-    float x = (adc_value) / ((float)max_adc_value);
+    // polynomial approximation of Temperature, using 4.7kOhm and 1kOhm (PT1000) at 3.3V.
+    
+    float x = ((adc_value + PT1000_offset) / (float)max_adc_value);
     float x2 = (x * x);
     float x3 = (x2 * x);
     float x4 = (x3 * x);

@@ -15,19 +15,19 @@
 class PT1000 : public TempSensor
 {
 public:
-	PT1000();
-	~PT1000();
+    PT1000();
+    ~PT1000();
 
-	// TempSensor interface.
-	void UpdateConfig(uint16_t module_checksum, uint16_t name_checksum);
-	float get_temperature();
-	void get_raw();
+    // TempSensor interface.
+    void UpdateConfig(uint16_t module_checksum, uint16_t name_checksum);
+    float get_temperature();
+    void get_raw();
 
 private:
     int new_PT1000_reading();
     float adc_value_to_temperature(uint32_t adc_value);
-
-	Pin PT1000_pin;
+    int PT1000_offset;
+    Pin PT1000_pin;
     float min_temp, max_temp;
 };
 

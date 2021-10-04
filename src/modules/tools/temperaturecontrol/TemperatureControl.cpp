@@ -285,7 +285,7 @@ void TemperatureControl::on_gcode_received(void *argument)
                 }
 
             }else if(gcode->get_num_args() == 0) {
-                gcode->stream->printf("Maximum temperature for %s(%d) is %f°C\n", this->designator.c_str(), this->pool_index, max_temp);
+                gcode->stream->printf("Maximum temperature for %s(%d) is %fÂ°C\n", this->designator.c_str(), this->pool_index, max_temp);
             }
 
         } else if (gcode->m == 301) {
